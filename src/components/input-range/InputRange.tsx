@@ -19,6 +19,7 @@ const InputRange : FC<InputRangeProps> = ({variant}) => {
     const {setTotalBackblaze, setTotalVultr, setTotalBunny, setTotalScaleway} = providerSlice.actions
     const {setStorageVal, setTransferVal} = valSlice.actions
     const {backblaze, bunny, scaleway, vultr} = useAppSelector(state => state.providerReducer.all.providers)
+    const {smallScreen} = useAppSelector(state => state.valReducer)
 
     const priceForBackblaze = () => {
         let sum = transferVal*backblaze.transferPrice + storageVal*backblaze.storagePrice!
@@ -80,21 +81,23 @@ const InputRange : FC<InputRangeProps> = ({variant}) => {
                 <div>
                     <h4>Transfer: {transferVal} GB</h4>
                     <input
+                        className='mobile__input'
                         type='range'
                         onChange={changeTransfer}
-                        min={1}
+                        min={0}
                         max={1000}
                         step={1}
                         value={transferVal}
                     ></input>
                 </div>
                 :
-                <div>
+                <div >
                     <h4>Storage: {storageVal} GB</h4>
                     <input
+                        className='mobile__input'
                         type='range'
                         onChange={changeStorage}
-                        min={1}
+                        min={0}
                         max={1000}
                         step={1}
                         value={storageVal}
@@ -103,7 +106,7 @@ const InputRange : FC<InputRangeProps> = ({variant}) => {
             }
             <div className='input__text'>
                 <span>0</span>
-                <span>1000</span>
+                <span style={{marginLeft: '20rem'}}>1000</span>
             </div>
         </form>
     )

@@ -4,19 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IValState {
     transferVal : number;
     storageVal : number;
-    totalBackblaze : number;
-    totalBunny : number;
-    totalScaleway : number;
-    totalVultr : number;
+    smallScreen : boolean;
 }
 
 const initialState : IValState = {
     transferVal: 0,
     storageVal: 0,
-    totalBackblaze: 0,
-    totalBunny: 0,
-    totalScaleway: 0,
-    totalVultr: 0,
+    smallScreen: false
 }
 
 export const valSlice = createSlice({
@@ -29,6 +23,9 @@ export const valSlice = createSlice({
         setStorageVal(state, action : PayloadAction<number>) {
             state.storageVal = action.payload
         },
+        setSmallScreen(state, action : PayloadAction<boolean>) {
+            state.smallScreen = action.payload
+        }
     }
 })
 

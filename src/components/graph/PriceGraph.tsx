@@ -9,8 +9,9 @@ interface PriceGraphProps {
 const PriceGraph : FC<PriceGraphProps> = ({obj}) => {
   const {allTotalPrices,} = useAppSelector(state => state.providerReducer.all)
   const arr = Object.values(allTotalPrices).sort((a, b) => b-a)
+  const {smallScreen} = useAppSelector(state => state.valReducer)
 
-   if (obj.total === 0) {
+   if (obj.total === 0 && smallScreen === false) {
       return (
         <div className="price__container"
         >
@@ -20,6 +21,22 @@ const PriceGraph : FC<PriceGraphProps> = ({obj}) => {
             style={{height: '0.2%',background: '#6255ba'}}
             className='box'
           ></div>
+        </div>
+      )
+    }
+
+    if (smallScreen) {
+      return (
+        <div className="price__container_mobile"
+          style={{width: `${obj.total === arr[0] ? '100' : (obj.total*100)/arr[0]}%`, minHeight: `${obj.total < 0.4 ? '5%' : ''}`}}
+        >
+          
+          <div
+            // style={{ width: `${width}px`, height: `${height}px` }}
+            style={{background: `${obj.total === arr[3] ? '#6255ba' : '#878b94'}` }}
+            className='box_mobile'
+          ></div>
+          <div className="box__price_mobile">{obj.total}$</div>
         </div>
       )
     }
